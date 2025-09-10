@@ -1,0 +1,21 @@
+# Build logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+venv/*
+ws/*
+
+
+*.bag
+*.mp4
+*.pdf
