@@ -55,6 +55,9 @@ RUN apt-get update && apt-get install -y \
     python-is-python3 \
     && rm -rf /var/lib/apt/lists/*
 
+# Install robot and gripper dependencies
+RUN apt-get update && apt-get install -y xterm
+
 # Create user
 RUN useradd -m -d /home/vscode vscode && \
     echo vscode:vscode | chpasswd && \

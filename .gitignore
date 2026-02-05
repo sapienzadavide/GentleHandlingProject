@@ -13,6 +13,7 @@ Thumbs.db
 .env
 
 venv/*
+!venv/.gitkeep
 ws/*
 
 

@@ -26,6 +26,11 @@
         "--volume=${env:HOME}/.Xauthority:/home/vscode/.Xauthority:rw",
         "--privileged",
         
+        // Serial
+        "--device=/dev/ttyACM0:/dev/ttyACM0",
+        "--group-add=dialout",
+        "--privileged",
+        
         // Network
         "--net=host",
         
