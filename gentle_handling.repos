@@ -3,3 +3,7 @@ repositories:
     type: git
     url: git@github.com:sapienzadavide/pickdnn_gentlevision.git
     version: main
+  gentle_robot:
+    type: git
+    url: git@github.com:GabrieleSoliani/gentle_robot.git
+    version: main
