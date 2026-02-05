@@ -58,8 +58,41 @@ RUN apt-get update && apt-get install -y \
 # Install robot and gripper dependencies
 RUN apt-get update && apt-get install -y xterm
 
+# Add Intel RealSense repository
+RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || \
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE && \
+    sudo sh -c 'echo "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" > /etc/apt/sources.list.d/realsense.list'
+
+# Install calibration dependencies
+RUN sudo apt update && sudo apt install -y \
+    # Intel RealSense SDK (without DKMS - not needed in container)
+    librealsense2-utils \
+    librealsense2-dev \
+    # Universal Robots driver
+    ros-${ROS_DISTRO}-ur-robot-driver \
+    ros-${ROS_DISTRO}-ur-description \
+    ros-${ROS_DISTRO}-ur-moveit-config \
+    # RealSense ROS2 dependencies (compiling from source)
+    ros-${ROS_DISTRO}-unique-identifier-msgs \
+    ros-${ROS_DISTRO}-diagnostic-updater \
+    ros-${ROS_DISTRO}-image-transport \
+    python3-tqdm \
+    # Testing dependencies
+    ros-${ROS_DISTRO}-launch-testing-ament-cmake \
+    # MoveIt2 (for guided robot movement during calibration)
+    ros-${ROS_DISTRO}-moveit \
+    # OpenCV for ArUco detection
+    python3-opencv \
+    ros-${ROS_DISTRO}-cv-bridge \
+    # Additional utilities
+    ros-${ROS_DISTRO}-tf-transformations \
+    ros-${ROS_DISTRO}-rqt \
+    ros-${ROS_DISTRO}-rqt-common-plugins \
+    && sudo rm -rf /var/lib/apt/lists/*
+
 # Create user
 RUN useradd -m -d /home/vscode vscode && \
+    usermod -aG sudo,video,dialout vscode && \
     echo vscode:vscode | chpasswd && \
     usermod -aG sudo vscode && \
     usermod --shell /bin/bash vscode && \
