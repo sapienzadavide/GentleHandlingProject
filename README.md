@@ -50,7 +50,7 @@ repositories:
 
 To import repositories:
 ```bash
-vcs import ws/src < gente_handling.repos
+vcs import ws/src < gentle_handling.repos
 ```
 
 ## Development Setup with Visual Studio Code
