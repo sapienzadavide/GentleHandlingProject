@@ -15,6 +15,7 @@ Thumbs.db
 venv/*
 !venv/.gitkeep
 ws/*
+!ws/aruco_tf_publisher.py
 cfg/*
 !cfg/.gitkeep
 
